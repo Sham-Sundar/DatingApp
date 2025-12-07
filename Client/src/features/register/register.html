@@ -1,0 +1,42 @@
+<div class="hero bg-base-200 min-h-screen">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left">
+      <h1 class="text-5xl font-bold">Register Now!</h1>
+      <p class="py-6">
+        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+        quasi. In deleniti eaque aut repudiandae et a id nisi.
+      </p>
+    </div>
+    <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+      <div class="card-body">
+        <form #registerForm="ngForm" (ngSubmit)="register()" class="fieldset">
+          <label class="label">Email</label>
+          <input
+            [(ngModel)]="creds.email"
+            name="email"
+            type="email"
+            class="input"
+            placeholder="Email"
+          />
+          <label class="label">Display Name</label>
+          <input
+            [(ngModel)]="creds.displayName"
+            name="displayName"
+            class="input"
+            placeholder="Display Name"
+          />
+          <label class="label">Password</label>
+          <input
+            [(ngModel)]="creds.password"
+            name="password"
+            type="password"
+            class="input"
+            placeholder="Password"
+          />
+          <button class="btn btn-primary mt-3" type="submit">Register</button>
+          <button class="btn hover:btn-error hover:text-white" type="submit" (click)="cancel()">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
