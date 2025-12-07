@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Nav } from "../layout/nav/nav";
-import { Home } from "../features/home/home";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [Nav, Home],
+  imports: [Nav, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -15,7 +15,7 @@ export class App implements OnInit {
   apiUrl: string = 'https://localhost:5001/api/members/';
   protected members = signal<any>([]);
 
-  ngOnInit(){
+  ngOnInit() {
     this.http.get(this.apiUrl).subscribe({
       next: response => this.members.set(response),
       error: error => console.error(error),

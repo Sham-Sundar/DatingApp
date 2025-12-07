@@ -1,8 +1,51 @@
-<div class="navbar bg-linear-to-r from-primary to-black drop-shadow-lg">
-  <div class="flex-1">
-    <a class="text-2xl text-white">DateMe</a>
+<div class="navbar bg-linear-to-r from-primary to-black text-primary-content px-10 shadow-sm">
+  <div class="navbar-start">
+    <div class="w-12 rounded-full">
+      <img alt="login-user" src="/web-icon.png" />
+    </div>
+    <a class="text-2xl font-medium" routerLink="/">DateMe</a>
   </div>
-  <div class="flex gap-2">
+
+  @if (accountService.currentUser()) {
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal text-xl px-1">
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="text-secondary active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/members"
+          routerLinkActive="text-secondary"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Matches</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/lists"
+          routerLinkActive="text-secondary"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Lists</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/messages"
+          routerLinkActive="text-secondary"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Messages</a
+        >
+      </li>
+    </ul>
+  </div>
+  }
+
+  <div class="navbar-end">
     @if (accountService.currentUser(); as user) {
     <div class="flex items-center gap-2">
       <div class="dropdown dropdown-end">
@@ -13,7 +56,7 @@
         </div>
         <ul
           tabindex="-1"
-          class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+          class="menu menu-sm dropdown-content text-neutral bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
         >
           <li>
             <a class="justify-between">
@@ -26,11 +69,11 @@
         </ul>
       </div>
 
-      <div class="text-xl text-white">{{user.displayName}}</div>
+      <div class="text-xl text-white">{{ user.displayName }}</div>
     </div>
     }@else{
 
-    <form #loginForm="ngForm" (ngSubmit)="login()" class="flex gap-2">
+    <form #loginForm="ngForm" (ngSubmit)="login()" class="flex gap-2 text-neutral">
       <input
         [(ngModel)]="creds.email"
         name="email"
@@ -50,3 +93,13 @@
     }
   </div>
 </div>
+
+<!-- <li>
+  <details>
+    <summary>Parent</summary>
+    <ul class="p-2 bg-base-100 w-40 z-1 text-neutral">
+      <li><a>Submenu 1</a></li>
+      <li><a>Submenu 2</a></li>
+    </ul>
+  </details>
+</li> -->
