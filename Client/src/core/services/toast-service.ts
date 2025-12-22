@@ -23,7 +23,7 @@ export class ToastService {
     if (!toastContainer) return;
 
     const toast = document.createElement('div');
-    toast.classList.add('alert', alertClass, 'shadow-lg');
+    toast.classList.add('alert', alertClass, 'shadow-lg', 'flex', 'justify-between');
     toast.innerHTML = `
       <span>${message}</span>
       <button class="btn btn-sm btn-circle">

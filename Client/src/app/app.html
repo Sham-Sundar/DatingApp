@@ -1,2 +1,4 @@
 <app-nav/>
-<router-outlet/>
+<div [ngClass]="router.url === '/' ? 'm-0' : 'm-10'">
+    <router-outlet/>
+</div>

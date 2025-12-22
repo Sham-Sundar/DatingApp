@@ -41,6 +41,14 @@
           >Messages</a
         >
       </li>
+      <li>
+        <a
+          routerLink="/test-errors"
+          routerLinkActive="text-secondary"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Test Errors</a
+        >
+      </li>
     </ul>
   </div>
   }
@@ -51,7 +59,11 @@
       <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
-            <img alt="login-user" src="/user.png" />
+            @if (user.imageUrl) {
+              <img alt="login-user" [src]="user.imageUrl" />
+            }@else {
+              <img alt="login-user" src="/user.png" />
+            }
           </div>
         </div>
         <ul
