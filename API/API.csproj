@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Repositories\" />
     <Folder Include="Errors\" />
     <Folder Include="Middlewares\" />
   </ItemGroup>
