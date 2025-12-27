@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-
+    [Authorize]
     public class MembersController(IMemberRepository memberRepository) : BaseAPIController
     {
         [HttpGet]
@@ -18,7 +18,7 @@ namespace API.Controllers
             // so this avoids the type mismatch warning when returning lists from the repository.
         }
 
-        [Authorize]
+
         [HttpGet("{id}")] // localhost:5001/api/members/bob-id
         public async Task<ActionResult<Member>> GetMember(string id)
         {
