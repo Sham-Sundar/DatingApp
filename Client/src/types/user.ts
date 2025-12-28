@@ -1,17 +1,18 @@
 export type User = {
-    email: string,
-    password: string,
-    displayName: string,
+    email: string
+    password: string
+    displayName: string
+    token: string
     imageUrl?: string
 }
 
 export type LoginCreds = {
-    email: string,
+    email: string
     password: string
 }
 
 export type RegisterCreds = {
-    email: string,
-    password: string,
+    email: string
+    password: string
     displayName: string
 }

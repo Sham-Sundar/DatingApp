@@ -11,19 +11,8 @@ import { NgClass } from '@angular/common';
   styleUrl: './app.css'
 })
 export class App {
-  private http = inject(HttpClient);
   protected router = inject(Router);
   readonly title = signal('Dating App');
-  apiUrl: string = 'https://localhost:5001/api/members/';
-  protected members = signal<any>([]);
-
-  // ngOnInit() {
-  //   this.http.get(this.apiUrl).subscribe({
-  //     next: response => this.members.set(response),
-  //     error: error => console.error(error),
-  //     complete: () => console.log("Request Completed")
-  //   })
-  // }
 
   isActiveRoute(route: string): boolean {
     return this.router.url === route;
