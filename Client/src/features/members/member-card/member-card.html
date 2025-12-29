@@ -7,9 +7,12 @@
     <div class="card-body">
         <h2 class="card-title justify-between">
             {{member.displayName}}
-            <div class="badge badge-secondary">{{member.city}}</div>
+            <div class="badge badge-secondary">Age: {{member.dateOfBirth | age}}</div>
         </h2>
         <p class="line-clamp-4">{{member.description}}</p>
+    </div>
+    <div class="card-actions px-6 pb-6">
+        <div class="badge badge-outline">City: {{member.city}}</div>
     </div>
 </div>
 }
