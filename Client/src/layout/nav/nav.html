@@ -65,6 +65,11 @@
     </ul>
   </div>
   }
+
+  @if (busyService.busyRequestCount() > 0) {
+    <span class="loading loading-spinner loading-xl text-secondary"></span>
+  }
+
   <div class="navbar-end gap-4">
     @if (accountService.currentUser(); as user) {
     <div class="flex items-center gap-2">
@@ -75,9 +80,9 @@
           </div>
         </div>
         <ul tabindex="-1"
-          class="menu menu-sm dropdown-content bg-base-100 text-primary rounded-box z-1 mt-3 w-52 p-2 shadow">
+          class="menu dropdown-content bg-base-100 text-primary rounded-box z-1 mt-3 w-52 p-2 shadow-sm">
           <li>
-            <a class="justify-between">
+            <a class="justify-between" routerLink="/members/{{user.id}}/profile">
               Profile
               <span class="badge">Logged In</span>
             </a>

@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { MemberService } from '../../../core/services/member-service';
 import { Observable } from 'rxjs';
-import { Photo } from '../../../types/photo';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
+import { Photo } from '../../../types/member';
 
 @Component({
   selector: 'app-member-photos',
