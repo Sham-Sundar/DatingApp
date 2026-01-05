@@ -9,7 +9,7 @@ import { Register } from '../account/register/register';
   styleUrl: './home.css',
 })
 export class Home {
-  protected _register = signal(false);
+  protected _register = signal(true);
   protected isRegistered = localStorage.getItem('isRegistered');
   protected isLoggedIn = localStorage.getItem('User');
   
