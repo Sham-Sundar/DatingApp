@@ -1,44 +1,65 @@
-<div class="hero bg-base-200 min-h-screen">
-  <div class="hero-content flex-col lg:flex-row-reverse">
-    <div class="text-center lg:text-left">
-      <h1 class="text-5xl font-bold">Register Now!</h1>
-      <p class="py-6">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-        quasi. In deleniti eaque aut repudiandae et a id nisi.
-      </p>
-    </div>
-    <div class="card bg-base-100 w-full max-w-xl shrink-0 shadow-2xl">
-      <div class="card-body p-10">
-        <form [formGroup]="registerForm" (ngSubmit)="register()" class="fieldset gap-4">
-          <label class="floating-label">
-            <span>Email</span>
-            <input formControlName="email" type="email" class="input w-full" placeholder="Email" />
-          </label>
-
-          <label class="floating-label">
-            <span>Display Name</span>
-            <input formControlName="displayName" class="input w-full" placeholder="Display Name" />
-          </label>
-
-          <label class="floating-label">
-            <span>Password</span>
-            <input formControlName="password" type="password" class="input w-full" placeholder="Password" />
-          </label>
-
-          <label class="floating-label">
-            <span>Confirm Password</span>
-            <input formControlName="confirmPassword" type="password" class="input w-full" placeholder="Password" />
-          </label>
-
-          <button [disabled]="registerForm.invalid" class="btn btn-primary mt-3" type="submit">Register</button>
+<div class="flex items-center justify-center w-screen pt-20">
+  <div class="card bg-base-100 w-1/2 shadow-2xl">
+    <div class="card-body p-10">
+      <h1 class="text-3xl font-bold text-center text-primary">Sign up</h1>
+      
+      <ul class="steps">
+        <li class="step step-primary">Credentials</li>
+        <li class="step" [class.step-primary]="credentialsForm.valid && currentStep() === 2">Profile</li>
+      </ul>
+  
+      @if (currentStep() === 1) {
+      <form [formGroup]="credentialsForm" class="flex flex-col gap-4 w-full steps p-3">
+        <app-text-input formControlName="email" label="Email" inputType="email" />
+        <app-text-input formControlName="displayName" label="Display name" inputType="text" />
+        <app-text-input formControlName="password" label="Password" inputType="password" />
+        <app-text-input formControlName="confirmPassword" label="Confirm password" inputType="password" />
+  
+        <!-- for handling group level errors -->
+        @if (credentialsForm.errors?.['passwordMismatch'] && credentialsForm.touched) {
+        <div class="text-error text-xs font-semibold -mt-2.5">Passwords do not match</div>
+        }
+  
+        <div class="flex items-center justify-end gap-4">
           <button class="btn hover:btn-error hover:text-white" type="submit" (click)="cancel()">Cancel</button>
-        </form>
-        <div class="flex flex-col w-full px-3 mockup-code text-lg">
-          <div>Form Value: {{registerForm.value | json}}</div>
-          <div>Form Status: {{registerForm.status | json}}</div>
+          <button [disabled]="credentialsForm.invalid" class="btn btn-primary" type="button"
+            (click)="nextStep()">Next</button>
         </div>
+      </form>
+      }
+  
+      @if (currentStep() === 2) {
+      <form [formGroup]="profileForm" class="flex flex-col gap-4 w-full steps p-3">
+        
+        <div class="flex items-center gap-4">
+          <div class="font-semibold">Gender: </div>
+          <label class="flex gap-3 items-center">
+              <span>Male</span>
+              <input type="radio" formControlName="gender" value="male" class="radio radio-primary">
+          </label>
+          <label class="flex gap-3 items-center">
+            <span>female</span>
+            <input type="radio" formControlName="gender" value="female" class="radio radio-primary">
+          </label>
+        </div>
+
+        <app-text-input formControlName="dateOfBirth" label="Date of birth" inputType="date"/>
+        <app-text-input formControlName="city" label="City"/>
+        <app-text-input formControlName="country" label="Country"/>
+  
+        <div class="flex items-center justify-end gap-4">
+          <button class="btn hover:btn-error hover:text-white" type="submit" (click)="prevStep()">Back</button>
+          <button [disabled]="profileForm.invalid" class="btn btn-primary" type="button"
+            (click)="register()">Register</button>
+        </div>
+      </form>
+      }
+      <div class="flex flex-col w-full px-3 mockup-code text-lg">
+        <div>Cred Value: {{credentialsForm.value | json}}</div>
+        <div>Cred Status: {{credentialsForm.status | json}}</div>
+        <div>Profile Value: {{profileForm.value | json}}</div>
+        <div>Profile Status: {{profileForm.status | json}}</div>
       </div>
     </div>
-
-  </div>
+    </div>
 </div>
