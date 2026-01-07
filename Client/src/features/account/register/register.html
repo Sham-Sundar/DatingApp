@@ -43,7 +43,7 @@
           </label>
         </div>
 
-        <app-text-input formControlName="dateOfBirth" label="Date of birth" inputType="date"/>
+        <app-text-input formControlName="dateOfBirth" label="Date of birth" inputType="date" [maxDate]="getMaxDate()"/>
         <app-text-input formControlName="city" label="City"/>
         <app-text-input formControlName="country" label="Country"/>
   
@@ -54,12 +54,15 @@
         </div>
       </form>
       }
-      <div class="flex flex-col w-full px-3 mockup-code text-lg">
-        <div>Cred Value: {{credentialsForm.value | json}}</div>
-        <div>Cred Status: {{credentialsForm.status | json}}</div>
-        <div>Profile Value: {{profileForm.value | json}}</div>
-        <div>Profile Status: {{profileForm.status | json}}</div>
-      </div>
+      @if (validationErrors().length > 0) {
+        <div class="mt-5 flex bg-gray-200 rounded-2xl w-1/2 p-3 mx-auto">
+          <ul class="flex flex-col text-error space-y-1">
+            @for (error of validationErrors(); track $index) {
+              <li>{{error}}</li>
+            }
+          </ul>
+        </div>
+      }
     </div>
     </div>
 </div>

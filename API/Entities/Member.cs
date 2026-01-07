@@ -5,10 +5,10 @@ namespace API.Entities;
 
 public class Member
 {
-    public required string Id { get; set; } = null!;
+    public string Id { get; set; } = null!;
     public required string DisplayName { get; set; }
     public string? ImageUrl { get; set; }
-    public DateOnly DateOfBirth { get; set; }
+    public required DateOnly DateOfBirth { get; set; }
     public DateTime Created { get; set; } = DateTime.UtcNow;
     public DateTime LastActive { get; set; } = DateTime.UtcNow;
     public required string Gender { get; set; }
