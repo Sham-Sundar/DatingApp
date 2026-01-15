@@ -1,6 +1,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,9 @@ namespace API.Controllers
     public class MembersController(IMemberRepository memberRepository, IPhotoService photoService) : BaseAPIController
     {
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Member>>> GetMembers()
+        public async Task<ActionResult<PaginatedResult<Member>>> GetMembers([FromQuery]PagingParams pagingParams)
         {
-            return Ok(await memberRepository.GetMembersAsync());
+            return Ok(await memberRepository.GetMembersAsync(pagingParams));
 
             // Wrap result in Ok(...) to return a proper HTTP 200 response.
             // Without Ok, the compiler cannot convert IReadOnlyList<Member> directly to ActionResult<IReadOnlyList<Member>,
@@ -36,7 +37,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateMember(MemberUpdateDTO memberUpdateDto)
+        public async Task<ActionResult> UpdateMember([FromBody]MemberUpdateDTO memberUpdateDto)
         {
             //its an extension method to get the user-id / member-id from the token using ClaimsPrincipal
             var memberId = User.GetMemberId();
