@@ -12,14 +12,15 @@ namespace API.Controllers
     public class MembersController(IMemberRepository memberRepository, IPhotoService photoService) : BaseAPIController
     {
         [HttpGet]
-        public async Task<ActionResult<PaginatedResult<Member>>> GetMembers([FromQuery]PagingParams pagingParams)
+        public async Task<ActionResult<PaginatedResult<Member>>> GetMembers([FromQuery]MemberParams memberParams)
         {
-            return Ok(await memberRepository.GetMembersAsync(pagingParams));
+            memberParams.CurrentMemberId = User.GetMemberId();
+            return Ok(await memberRepository.GetMembersAsync(memberParams));
 
+        }
             // Wrap result in Ok(...) to return a proper HTTP 200 response.
             // Without Ok, the compiler cannot convert IReadOnlyList<Member> directly to ActionResult<IReadOnlyList<Member>,
             // so this avoids the type mismatch warning when returning lists from the repository.
-        }
 
 
         [HttpGet("{id}")] // localhost:5001/api/members/bob-id
